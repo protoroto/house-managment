@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-sm-12">
+			<h1>Bollette</h1>
+		</div>
+		<div class="col-sm-12">
+			{% for bill in bills %}
+				{{ bill.title }} - {{ bill.cost }} - {{ bill.expiry_date }} - {{ bill.payed }} - {{ bill.payed_date }}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock content %}
