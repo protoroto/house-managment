@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from deadlines.views import BillListView
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', BillListView.as_view(), name='bills-list'),
 ]
