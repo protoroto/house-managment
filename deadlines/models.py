@@ -1,7 +1,14 @@
+from datetime import date
+
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
+
+PERSON = (
+    ('L', _("Leo")),
+    ('I', _("Isa")),
+)
 
 
 class Bill(models.Model):
@@ -24,7 +31,7 @@ class Bill(models.Model):
     )
     payed_date = models.DateField(
     	verbose_name=_(u'Data di pagamento'), 
-    	blank=True, null=True
+    	blank=True, null=True,
     )
     payed_image = models.ImageField(
     	verbose_name=_(u'Immagine bolletta pagata'),
@@ -39,3 +46,63 @@ class Bill(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.title, self.expiry_date)
+
+
+class Expense(models.Model):
+    title = models.CharField(
+    	verbose_name=_(u'Nome spesa'), 
+    	max_length=200,
+    	blank=False, null=False
+    )
+    cost = models.DecimalField(
+    	verbose_name=_(u'Prezzo'),
+    	max_digits=6,
+    	decimal_places=2,
+    	blank=False, null=False
+    )
+    payed_date = models.DateField(
+    	verbose_name=_(u'Data della spesa'), 
+    	blank=False, null=False,
+    	default=date.today
+    )
+    person = models.CharField(
+    	verbose_name=_(u"Chi ha speso"), 
+    	max_length=1, blank=False, null=False, choices=PERSON
+    )
+
+    class Meta:
+        verbose_name = _('Spesa')
+        verbose_name_plural = _('Spese')
+        ordering = ('payed_date',)
+
+    def __str__(self):
+        return '{} - {} - {} - {}'.format(self.payed_date, self.title, self.cost, self.person)
+
+
+class Memo(models.Model):
+    title = models.CharField(
+    	verbose_name=_(u'Nome memo'), 
+    	max_length=200,
+    	blank=False, null=False
+    )
+    cost = models.DecimalField(
+    	verbose_name=_(u'Prezzo'),
+    	max_digits=6,
+    	decimal_places=2,
+    	blank=True, null=True
+    )
+    expiry_date = models.DateField(
+    	verbose_name=_(u'Data della spesa'), 
+    	blank=True, null=True
+    )
+
+    class Meta:
+        verbose_name = _('Memo')
+        verbose_name_plural = _('Memo')
+        ordering = ('expiry_date', 'title')
+
+    def __str__(self):
+    	if self.expiry_date:
+    		return '{} - {}'.format(self.expiry_date, self.title)
+    	else:
+    		return self.title

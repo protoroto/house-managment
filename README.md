@@ -1,2 +1,2 @@
-# house-managment
-Simple app for house bills managment
+# house-management
+Simple app for house bills management

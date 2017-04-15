@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-sm-12">
+			<h2>Bollette</h2>
+		</div>
+		<div class="col-sm-12">
+			<table class="table table-hover table-striped">
+				<thead class="thead-inverse">
+				    <tr>
+				      	<th>Nome</th>
+				      	<th>Costo</th>
+				      	<th>Data scadenza</th>
+				      	<th class="text-center">Pagata</th>
+				      	<th class="text-center">Data pagamento</th>
+				    </tr>
+				</thead>
+				<tbody>
+					{% for bill in bills %}			
+				    <tr>
+				      	<td>{{ bill.title }}</td>
+				      	<td>{{ bill.cost }}</td>
+				      	<td>{{ bill.expiry_date }}</td>
+				      	<td class="text-center">
+				      		{% if bill.payed %}
+				      			<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+							{% else %}
+								<i class="fa fa-thumbs-down" aria-hidden="true"></i>
+							{% endif %}
+						</td>
+				      	<td class="text-center">
+				      		{% if bill.payed_date %}
+				      			{{ bill.payed_date }}
+				      		{% else %}
+				      			Da pagare
+				      		{% endif %}
+				      	</td>
+				    </tr>
+				    {% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock content %}
