@@ -2,3 +2,4 @@ env/
 gunicorn_start.sh
 __pycache__/
 /static/
+settings_live.py
