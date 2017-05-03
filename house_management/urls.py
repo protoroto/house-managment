@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from deadlines.views import HouseManagementList
+from deadlines.views import BillList, HouseManagementList
+
+import deadlines
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('deadlines.urls', namespace='deadlines')),
+    url(r'^bills/$', BillList.as_view(), name="bills"),
     url(r'^$', HouseManagementList.as_view(), name='bills-list'),
 ]

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+	{% block bills %}
 	<div class="row">
 		<div class="col-sm-12">
 			<h2>Bollette</h2>
@@ -42,6 +43,8 @@
 			</table>
 		</div>
 	</div>
+	{% endblock %}
+	{% block expenses %}
 	<div class="row">
 		<div class="col-sm-12">
 			<h2>Spese</h2>
@@ -71,6 +74,8 @@
 			</table>
 		</div>
 	</div>
+	{% endblock %}
+	{% block memo %}
 	<div class="row">
 		<div class="col-sm-12">
 			<h2>Memo</h2>
@@ -100,4 +105,5 @@
 			</table>
 		</div>
 	</div>
+	{% endblock %}
 {% endblock content %}
