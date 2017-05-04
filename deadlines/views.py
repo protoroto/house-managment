@@ -71,3 +71,57 @@ class BillList(APIView):
 			'bills': bill_serializer.data,
 			'serializer': form_serializer
 		}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ExpenseList(APIView):
+
+	renderer_classes = (TemplateHTMLRenderer,)
+	template_name = 'deadlines/expenses.html'
+
+	def get(self, request, format=None):
+		expenses = Expense.objects.all()
+		expense_serializer = ExpenseSerializer(expenses, many=True)
+		form_serializer = ExpenseSerializer
+		return Response({
+			'expenses': expense_serializer.data,
+			'serializer': form_serializer
+		})
+
+	def post(self, request, format=None):
+		expenses = Expense.objects.all()
+		expense_serializer = ExpenseSerializer(expenses, many=True)
+		form_serializer = ExpenseSerializer(data=request.data)
+		if form_serializer.is_valid():
+			form_serializer.save()
+			return redirect('expenses')
+		return Response({
+			'expenses': expense_serializer.data,
+			'serializer': form_serializer
+		}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MemoList(APIView):
+
+	renderer_classes = (TemplateHTMLRenderer,)
+	template_name = 'deadlines/memo.html'
+
+	def get(self, request, format=None):
+		memo = Memo.objects.all()
+		memo_serializer = MemoSerializer(memo, many=True)
+		form_serializer = MemoSerializer
+		return Response({
+			'memos': memo_serializer.data,
+			'serializer': form_serializer
+		})
+
+	def post(self, request, format=None):
+		memo = Bill.objects.all()
+		memo_serializer = MemoSerializer(memo, many=True)
+		form_serializer = MemoSerializer(data=request.data)
+		if form_serializer.is_valid():
+			form_serializer.save()
+			return redirect('memo')
+		return Response({
+			'memos': memo_serializer.data,
+			'serializer': form_serializer
+		}, status=status.HTTP_400_BAD_REQUEST)

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from deadlines.views import BillList, HouseManagementList
+from deadlines.views import BillList, ExpenseList, HouseManagementList, MemoList
 
 import deadlines
 
@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('deadlines.urls', namespace='deadlines')),
     url(r'^bills/$', BillList.as_view(), name="bills"),
+    url(r'^expenses/$', ExpenseList.as_view(), name="expenses"),
+    url(r'^memo/$', MemoList.as_view(), name="memo"),
     url(r'^$', HouseManagementList.as_view(), name='bills-list'),
 ]

@@ -9,7 +9,7 @@
         </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
         <header>
@@ -17,6 +17,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h1 class="text-center">Gestionale bollette e scadenze<h1>
+                    </div>
+                    <div class="col-sm-12">
+                        <ul class="main-menu">
+                            <li class="main-menu--item"><a class="btn btn-primary" href="{% url 'bills' %}">Bollette</a></li>
+                            <li class="main-menu--item"><a class="btn btn-primary" href="{% url 'expenses' %}">Spese</a></li>
+                            <li class="main-menu--item"><a class="btn btn-primary" href="{% url 'memo' %}">Memo</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
