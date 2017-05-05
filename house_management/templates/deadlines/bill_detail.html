@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% load rest_framework sekizai_tags %}
+{% load rest_framework %}
 
 
 {% block content %}
 <div class="row">
 	<div class="col-sm-12">
-		<h2>Bollette</h2>
+		<h2>Bolletta {{ bill.title }}</h2>
 	</div>
 	<div class="col-sm-4">
 		<form class="add-form" action="" method="post">
@@ -27,8 +27,7 @@
 			    </tr>
 			</thead>
 			<tbody>
-				{% for bill in bills %}
-				<tr class="clickable-row" data-url="{% url 'bill-detail' pk=bill.pk %}">
+			    <tr>
 			      	<td>{{ bill.title }}</td>
 			      	<td>{{ bill.cost }}</td>
 			      	<td>{{ bill.expiry_date }}</td>
@@ -47,21 +46,9 @@
 			      			Da pagare
 			      		{% endif %}
 			      	</td>
-				</tr>
-			    {% endfor %}
+			    </tr>
 			</tbody>
 		</table>
 	</div>
 </div>
-
-{% addtoblock "bottom_js" %}
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-	    $(".clickable-row").click(function() {
-	        window.location = $(this).data("url");
-	    });
-	});
-</script>
-{% endaddtoblock %}
-
 {% endblock %}

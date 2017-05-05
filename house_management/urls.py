@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """house_management URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -15,7 +16,9 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from deadlines.views import BillList, ExpenseList, HouseManagementList, MemoList
+from deadlines.views import (
+    BillDetail, BillList, ExpenseDetail, ExpenseList, HouseManagementList, MemoDetail, MemoList
+)
 
 import deadlines
 
@@ -23,8 +26,11 @@ import deadlines
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('deadlines.urls', namespace='deadlines')),
-    url(r'^bills/$', BillList.as_view(), name="bills"),
-    url(r'^expenses/$', ExpenseList.as_view(), name="expenses"),
-    url(r'^memo/$', MemoList.as_view(), name="memo"),
+    url(r'^bills/$', BillList.as_view(), name='bills'),
+    url(r'^bills/(?P<pk>[0-9]+)/$', BillDetail.as_view(), name='bill-detail'),
+    url(r'^expenses/$', ExpenseList.as_view(), name='expenses'),
+    url(r'^expenses/(?P<pk>[0-9]+)/$', ExpenseDetail.as_view(), name='expense-detail'),
+    url(r'^memo/$', MemoList.as_view(), name='memo'),
+    url(r'^memo/(?P<pk>[0-9]+)/$', MemoDetail.as_view(), name='memo-detail'),
     url(r'^$', HouseManagementList.as_view(), name='bills-list'),
 ]

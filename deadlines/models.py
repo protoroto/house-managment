@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from datetime import date
 
 from django.db import models
@@ -13,33 +14,33 @@ PERSON = (
 
 class Bill(models.Model):
     title = models.CharField(
-    	verbose_name=_(u'Nome bolletta'),
-    	max_length=200
+        verbose_name=_(u'Nome bolletta'),
+        max_length=200
     )
     cost = models.DecimalField(
-    	verbose_name=_(u'Prezzo'),
-    	max_digits=6,
-    	decimal_places=2
+        verbose_name=_(u'Prezzo'),
+        max_digits=6,
+        decimal_places=2
     )
     expiry_date = models.DateField(
-    	verbose_name=_(u'Data di scadenza'),
-    	blank=False, null=False
+        verbose_name=_(u'Data di scadenza'),
+        blank=False, null=False
     )
     payed = models.BooleanField(
-    	verbose_name=_(u'Pagata'),
-    	default=False
+        verbose_name=_(u'Pagata'),
+        default=False
     )
     person = models.CharField(
         verbose_name=_(u"Chi ha pagato"),
         max_length=1, blank=True, null=True, choices=PERSON
     )
     payed_date = models.DateField(
-    	verbose_name=_(u'Data di pagamento'),
-    	blank=True, null=True,
+        verbose_name=_(u'Data di pagamento'),
+        blank=True, null=True,
     )
     payed_image = models.ImageField(
-    	verbose_name=_(u'Immagine bolletta pagata'),
-    	blank=True, null=True
+        verbose_name=_(u'Immagine bolletta pagata'),
+        blank=True, null=True
     )
 
     class Meta:
@@ -60,24 +61,24 @@ class Bill(models.Model):
 
 class Expense(models.Model):
     title = models.CharField(
-    	verbose_name=_(u'Nome spesa'),
-    	max_length=200,
-    	blank=False, null=False
+        verbose_name=_(u'Nome spesa'),
+        max_length=200,
+        blank=False, null=False
     )
     cost = models.DecimalField(
-    	verbose_name=_(u'Prezzo'),
-    	max_digits=6,
-    	decimal_places=2,
-    	blank=False, null=False
+        verbose_name=_(u'Prezzo'),
+        max_digits=6,
+        decimal_places=2,
+        blank=False, null=False
     )
     payed_date = models.DateField(
-    	verbose_name=_(u'Data della spesa'),
-    	blank=False, null=False,
-    	default=date.today
+        verbose_name=_(u'Data della spesa'),
+        blank=False, null=False,
+        default=date.today
     )
     person = models.CharField(
-    	verbose_name=_(u"Chi ha speso"),
-    	max_length=1, blank=False, null=False, choices=PERSON
+        verbose_name=_(u"Chi ha speso"),
+        max_length=1, blank=False, null=False, choices=PERSON
     )
 
     class Meta:
@@ -91,19 +92,19 @@ class Expense(models.Model):
 
 class Memo(models.Model):
     title = models.CharField(
-    	verbose_name=_(u'Nome memo'),
-    	max_length=200,
-    	blank=False, null=False
+        verbose_name=_(u'Nome memo'),
+        max_length=200,
+        blank=False, null=False
     )
     cost = models.DecimalField(
-    	verbose_name=_(u'Prezzo'),
-    	max_digits=6,
-    	decimal_places=2,
-    	blank=True, null=True
+        verbose_name=_(u'Prezzo'),
+        max_digits=6,
+        decimal_places=2,
+        blank=True, null=True
     )
     expiry_date = models.DateField(
-    	verbose_name=_(u'Data della spesa'),
-    	blank=True, null=True
+        verbose_name=_(u'Data della spesa'),
+        blank=True, null=True
     )
 
     class Meta:
@@ -112,7 +113,7 @@ class Memo(models.Model):
         ordering = ('expiry_date', 'title')
 
     def __str__(self):
-    	if self.expiry_date:
-    		return '{} - {}'.format(self.expiry_date, self.title)
-    	else:
-    		return self.title
+        if self.expiry_date:
+            return '{} - {}'.format(self.expiry_date, self.title)
+        else:
+            return self.title

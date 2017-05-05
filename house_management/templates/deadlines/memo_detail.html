@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% load rest_framework sekizai_tags %}
+{% load rest_framework %}
 
 
 {% block content %}
 <div class="row">
 	<div class="col-sm-12">
-		<h2>Memo</h2>
+		<h2>Memo {{ memo.title }}</h2>
 	</div>
 	<div class="col-sm-4">
 		<form class="add-form" action="" method="post">
@@ -24,8 +24,7 @@
 			    </tr>
 			</thead>
 			<tbody>
-				{% for memo in memos %}
-			    <tr class="clickable-row" data-url="{% url 'memo-detail' pk=memo.pk %}">
+			    <tr>
 			      	<td>{{ memo.title }}</td>
 			      	<td>
 			      		{% if memo.cost %}{{ memo.cost }}{% endif %}
@@ -34,20 +33,8 @@
 			      		{% if memo.expiry_date %}{{ memo.expiry_date }}{% endif %}
 			      	</td>
 			    </tr>
-			    {% endfor %}
 			</tbody>
 		</table>
 	</div>
 </div>
-
-{% addtoblock "bottom_js" %}
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-	    $(".clickable-row").click(function() {
-	        window.location = $(this).data("url");
-	    });
-	});
-</script>
-{% endaddtoblock %}
-
 {% endblock %}
