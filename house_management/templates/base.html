@@ -17,6 +17,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <ul class="main-menu">
+                            <li class="main-menu--item"><a class="btn btn-primary" href="{% url 'bills-list' %}">Home</a></li>
                             <li class="main-menu--item"><a class="btn btn-primary" href="{% url 'bills' %}">Bollette</a></li>
                             <li class="main-menu--item"><a class="btn btn-primary" href="{% url 'expenses' %}">Spese</a></li>
                             <li class="main-menu--item"><a class="btn btn-primary" href="{% url 'memo' %}">Memo</a></li>
@@ -29,6 +30,8 @@
             {% block content %}{% endblock content %}
         </div>
         <footer>
+            <div class="container">
+            </div>
         </footer>
     </body>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
@@ -36,7 +39,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script async type="text/javascript">
         WebFontConfig = {
-            google: { families: [ 'Roboto+Condensed:400,700:latin', 'Montserrat:400:latin'] }
+            google: { families: [ 'Roboto+Condensed:400,700:latin', 'Bevan:400:latin'] }
         };
         (function() {
             var wf = document.createElement('script');

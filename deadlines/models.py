@@ -13,7 +13,7 @@ PERSON = (
 
 class Bill(models.Model):
     title = models.CharField(
-    	verbose_name=_(u'Nome bolletta'), 
+    	verbose_name=_(u'Nome bolletta'),
     	max_length=200
     )
     cost = models.DecimalField(
@@ -22,15 +22,19 @@ class Bill(models.Model):
     	decimal_places=2
     )
     expiry_date = models.DateField(
-    	verbose_name=_(u'Data di scadenza'), 
+    	verbose_name=_(u'Data di scadenza'),
     	blank=False, null=False
     )
     payed = models.BooleanField(
     	verbose_name=_(u'Pagata'),
     	default=False
     )
+    person = models.CharField(
+        verbose_name=_(u"Chi ha pagato"),
+        max_length=1, blank=True, null=True, choices=PERSON
+    )
     payed_date = models.DateField(
-    	verbose_name=_(u'Data di pagamento'), 
+    	verbose_name=_(u'Data di pagamento'),
     	blank=True, null=True,
     )
     payed_image = models.ImageField(
@@ -47,10 +51,16 @@ class Bill(models.Model):
     def __str__(self):
         return '{} - {}'.format(self.title, self.expiry_date)
 
+    @property
+    def get_person(self):
+        if self.person:
+            return self.get_person_display()
+        return '-'
+
 
 class Expense(models.Model):
     title = models.CharField(
-    	verbose_name=_(u'Nome spesa'), 
+    	verbose_name=_(u'Nome spesa'),
     	max_length=200,
     	blank=False, null=False
     )
@@ -61,12 +71,12 @@ class Expense(models.Model):
     	blank=False, null=False
     )
     payed_date = models.DateField(
-    	verbose_name=_(u'Data della spesa'), 
+    	verbose_name=_(u'Data della spesa'),
     	blank=False, null=False,
     	default=date.today
     )
     person = models.CharField(
-    	verbose_name=_(u"Chi ha speso"), 
+    	verbose_name=_(u"Chi ha speso"),
     	max_length=1, blank=False, null=False, choices=PERSON
     )
 
@@ -81,7 +91,7 @@ class Expense(models.Model):
 
 class Memo(models.Model):
     title = models.CharField(
-    	verbose_name=_(u'Nome memo'), 
+    	verbose_name=_(u'Nome memo'),
     	max_length=200,
     	blank=False, null=False
     )
@@ -92,7 +102,7 @@ class Memo(models.Model):
     	blank=True, null=True
     )
     expiry_date = models.DateField(
-    	verbose_name=_(u'Data della spesa'), 
+    	verbose_name=_(u'Data della spesa'),
     	blank=True, null=True
     )
 

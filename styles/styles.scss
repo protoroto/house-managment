@@ -14,12 +14,14 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', serif;
+    font-family: 'Bevan', serif;
 }
 
 h1,
 h2 {
 	margin-bottom: $gutter;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 h2 {
@@ -28,8 +30,14 @@ h2 {
 
 header {
 	padding: $gutter;
-	margin-bottom: $gutter;
-	background: $white;
+	margin-bottom: $gutter * 2;
+	background: $blue-dark;
+}
+
+footer {
+    padding: $gutter * 2;
+    margin-top: $gutter * 2;
+    background: $blue-dark;
 }
 
 .main-menu {
@@ -58,6 +66,10 @@ header {
 			color: $white;
 		}
 	}
+}
+
+.thead-inverse th {
+    background-color: $blue;
 }
 
 .add-form {

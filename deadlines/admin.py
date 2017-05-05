@@ -5,12 +5,12 @@ from .models import Bill, Expense, Memo
 
 class BillAdmin(admin.ModelAdmin):
 	list_display = (
-		'title', 'cost', 'expiry_date', 'payed', 'payed_date', 
+		'title', 'cost', 'expiry_date', 'payed', 'person', 'payed_date',
 	)
-	list_filter = ('expiry_date', 'payed', 'payed_date')
+	list_filter = ('expiry_date', 'payed', 'payed_date', 'person')
 	fieldsets = (
 		('Dati bolletta', {
-            'fields': (('title', 'cost', 'expiry_date'), ('payed', 'payed_date', 'payed_image'),)
+            'fields': (('title', 'cost', 'expiry_date'), ('payed', 'person', 'payed_date', 'payed_image'),)
         }),
     )
 
@@ -33,7 +33,7 @@ admin.site.register(Expense, ExpenseAdmin)
 
 class MemoAdmin(admin.ModelAdmin):
 	list_display = (
-		'title', 'cost', 'expiry_date', 
+		'title', 'cost', 'expiry_date',
 	)
 	list_filter = ('expiry_date',)
 	fieldsets = (

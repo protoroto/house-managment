@@ -1,9 +1,8 @@
-{% extends "deadlines/bill_list.html" %}
+{% extends "base.html" %}
 {% load rest_framework %}
 
-{% block bills %}{% endblock %}
 
-{% block expenses %}
+{% block content %}
 <div class="row">
 	<div class="col-sm-12">
 		<h2>Spese</h2>
@@ -26,13 +25,13 @@
 			    </tr>
 			</thead>
 			<tbody>
-				{% for expense in expenses %}			
+				{% for expense in expenses %}
 			    <tr>
 			      	<td>{{ expense.title }}</td>
 			      	<td>{{ expense.cost }}</td>
 			      	<td>{{ expense.payed_date }}</td>
 			      	<td class="text-center">
-			      		{{ expense.person.0 }}
+			      		{{ expense.person }}
 					</td>
 			    </tr>
 			    {% endfor %}
@@ -41,5 +40,3 @@
 	</div>
 </div>
 {% endblock %}
-
-{% block memo %}{% endblock %}

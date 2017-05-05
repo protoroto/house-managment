@@ -1,10 +1,8 @@
-{% extends "deadlines/bill_list.html" %}
+{% extends "base.html" %}
 {% load rest_framework %}
 
-{% block bills %}{% endblock %}
-{% block expenses %}{% endblock %}
 
-{% block memo %}
+{% block content %}
 <div class="row">
 	<div class="col-sm-12">
 		<h2>Memo</h2>
@@ -26,7 +24,7 @@
 			    </tr>
 			</thead>
 			<tbody>
-				{% for memo in memos %}			
+				{% for memo in memos %}
 			    <tr>
 			      	<td>{{ memo.title }}</td>
 			      	<td>

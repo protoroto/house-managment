@@ -6,7 +6,7 @@ class BillSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bill
-        fields = '__all__'
+        fields = ('title', 'cost', 'expiry_date', 'payed', 'person', 'get_person', 'payed_date', 'payed_image')
 
 
 class ExpenseSerializer(serializers.ModelSerializer):

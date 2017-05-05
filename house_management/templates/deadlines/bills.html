@@ -1,7 +1,8 @@
-{% extends "deadlines/bill_list.html" %}
+{% extends "base.html" %}
 {% load rest_framework %}
 
-{% block bills %}
+
+{% block content %}
 <div class="row">
 	<div class="col-sm-12">
 		<h2>Bollette</h2>
@@ -21,11 +22,12 @@
 			      	<th>Costo</th>
 			      	<th>Data scadenza</th>
 			      	<th class="text-center">Pagata</th>
+			      	<th class="text-center">Da chi</th>
 			      	<th class="text-center">Data pagamento</th>
 			    </tr>
 			</thead>
 			<tbody>
-				{% for bill in bills %}			
+				{% for bill in bills %}
 			    <tr>
 			      	<td>{{ bill.title }}</td>
 			      	<td>{{ bill.cost }}</td>
@@ -37,6 +39,7 @@
 							<i class="fa fa-thumbs-down" aria-hidden="true"></i>
 						{% endif %}
 					</td>
+					<td class="text-center">{{ bill.get_person }}</td>
 			      	<td class="text-center">
 			      		{% if bill.payed_date %}
 			      			{{ bill.payed_date }}
@@ -51,6 +54,3 @@
 	</div>
 </div>
 {% endblock %}
-
-{% block expenses %}{% endblock %}
-{% block memo %}{% endblock %}
