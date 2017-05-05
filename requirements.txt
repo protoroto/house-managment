@@ -9,3 +9,4 @@ Pillow
 djangorestframework
 django-filter==1.0.2
 django-crispy-forms==1.6.1
+django-sekizai==0.10.0
