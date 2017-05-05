@@ -1,10 +1,25 @@
+$blue-light: #d9eef2;
+$blue: #8da4cc;
+$blue-dark: #464a56;
+$white: #ffffff;
+$red: #c55151;
+$yellow: #d6c944;
+
+$gutter: 20px;
+
+
 body {
     font-family: 'Roboto Condensed', sans-serif;
-    background: #efefef;
+    background: $blue-light;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', serif;
+}
+
+h1,
+h2 {
+	margin-bottom: $gutter;
 }
 
 h2 {
@@ -12,9 +27,9 @@ h2 {
 }
 
 header {
-	padding: 20px;
-	margin-bottom: 20px;
-	background: white;
+	padding: $gutter;
+	margin-bottom: $gutter;
+	background: $white;
 }
 
 .main-menu {
@@ -25,20 +40,40 @@ header {
 
 .main-menu--item {
 	display: inline-block;
-	margin-right: 10px;
+	margin-right: $gutter / 2;
+	text-transform: uppercase;
 
 	a {
-		color: #0275d8;
+		color: $blue-dark;
+		border-color: $blue-dark;
 		text-decoration: none;
-		background: #efefef;
-		padding: 10px 20px;
+		background: $blue-light;
+		padding: $gutter / 2 $gutter;
 	}
 
 	&:hover {
 
 		a {
-			background: #0275d8;
-			color: white;
+			background: $blue;
+			color: $white;
 		}
 	}
+}
+
+.add-form {
+	padding: $gutter;
+	background: $blue-dark;
+	color: $white;
+	border-radius: $gutter / 4;
+	border: 2px solid $blue;
+	text-transform: uppercase;
+}
+
+.help-block {
+	background: $red;
+    display: block;
+    border-radius: 0 0 $gutter / 4 $gutter / 4;
+    padding: $gutter / 4 15px $gutter / 4;
+    color: $white;
+    margin-top: -2px;
 }
