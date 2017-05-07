@@ -7,20 +7,20 @@
 	<div class="col-sm-12">
 		<h2>Spese</h2>
 	</div>
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<form class="add-form" action="" method="post">
 		    {% csrf_token %}
 		    {% render_form serializer template_pack='rest_framework/vertical' %}
 		    <button type="submit" class="btn btn-primary">Save</button>
 		</form>
 	</div>
-	<div class="col-sm-8">
+	<div class="col-sm-7">
 		<table class="table table-hover table-striped">
 			<thead class="thead-inverse">
 			    <tr>
 			      	<th>Nome</th>
-			      	<th>Costo</th>
-			      	<th>Data spesa</th>
+			      	<th class="text-right">Costo</th>
+			      	<th class="text-center">Data spesa</th>
 			      	<th class="text-center">Chi ha speso</th>
 			    </tr>
 			</thead>
@@ -28,15 +28,19 @@
 				{% for expense in expenses %}
 			    <tr class="clickable-row" data-url="{% url 'expense-detail' pk=expense.pk %}">
 			      	<td>{{ expense.title }}</td>
-			      	<td>{{ expense.cost }}</td>
-			      	<td>{{ expense.payed_date }}</td>
+			      	<td class="text-right">{{ expense.cost }} €</td>
+			      	<td class="text-center">{{ expense.payed_date }}</td>
 			      	<td class="text-center">
-			      		{{ expense.person }}
+			      		{{ expense.get_person }}
 					</td>
 			    </tr>
 			    {% endfor %}
 			</tbody>
 		</table>
+	</div>
+	<div class="col-sm-2">
+		<p class="expense expense-leo">Leo: <span>{{ total_leo }} €</span></p>
+		<p class="expense expense-isa">Isa: <span>{{ total_isa }} €</span></p>
 	</div>
 </div>
 

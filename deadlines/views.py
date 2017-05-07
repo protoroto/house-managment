@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
+from django.db.models import Sum
+from django_filters import rest_framework as filters
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
+from django.utils.timezone import now
 from django.views.generic.list import ListView
 from rest_framework import viewsets
-from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework import generics, mixins, status
 from rest_framework.filters import OrderingFilter
-from django_filters import rest_framework as filters
 
 from .models import Bill, Expense, Memo
 from .serializers import BillSerializer, ExpenseSerializer, MemoSerializer
@@ -96,12 +98,19 @@ class ExpenseList(APIView):
     template_name = 'deadlines/expenses.html'
 
     def get(self, request, format=None):
+        this_month = now().month
         expenses = Expense.objects.all()
+        expenses_leo = Expense.objects.filter(
+            person='L').filter(payed_date__month=this_month).aggregate(total_leo=Sum('cost'))
+        expenses_isa = Expense.objects.filter(
+            person='I').filter(payed_date__month=this_month).aggregate(total_isa=Sum('cost'))
         expense_serializer = ExpenseSerializer(expenses, many=True)
         form_serializer = ExpenseSerializer
         return Response({
             'expenses': expense_serializer.data,
-            'serializer': form_serializer
+            'serializer': form_serializer,
+            'total_leo': expenses_leo['total_leo'],
+            'total_isa': expenses_isa['total_isa'],
         })
 
     def post(self, request, format=None):

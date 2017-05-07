@@ -100,3 +100,21 @@ footer {
     margin-top: -2px;
     border: 1px solid rgba(0,0,0,.15)
 }
+
+.expense {
+    padding: $gutter;
+    text-align: center;
+    border-radius: $gutter / 4;
+
+    span {
+        font-size: 20px;
+    }
+}
+
+.expense-leo {
+    background: $yellow;
+}
+
+.expense-isa {
+    background: $yellow;
+}

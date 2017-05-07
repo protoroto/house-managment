@@ -19,18 +19,18 @@
 			<thead class="thead-inverse">
 			    <tr>
 			      	<th>Cosa</th>
-			      	<th>Costo</th>
-			      	<th>Data scadenza</th>
+			      	<th class="text-right">Costo</th>
+			      	<th class="text-center">Data scadenza</th>
 			    </tr>
 			</thead>
 			<tbody>
 				{% for memo in memos %}
 			    <tr class="clickable-row" data-url="{% url 'memo-detail' pk=memo.pk %}">
 			      	<td>{{ memo.title }}</td>
-			      	<td>
-			      		{% if memo.cost %}{{ memo.cost }}{% endif %}
+			      	<td class="text-right">
+			      		{% if memo.cost %}{{ memo.cost }} €{% endif %}
 			      	</td>
-			      	<td>
+			      	<td class="text-center">
 			      		{% if memo.expiry_date %}{{ memo.expiry_date }}{% endif %}
 			      	</td>
 			    </tr>

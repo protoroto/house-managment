@@ -90,6 +90,12 @@ class Expense(models.Model):
     def __str__(self):
         return '{} - {} - {} - {}'.format(self.payed_date, self.title, self.cost, self.person)
 
+    @property
+    def get_person(self):
+        if self.person:
+            return self.get_person_display()
+        return '-'
+
 
 class Memo(models.Model):
     title = models.CharField(

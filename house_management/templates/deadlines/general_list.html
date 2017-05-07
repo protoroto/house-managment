@@ -12,18 +12,18 @@
 				<thead class="thead-inverse">
 				    <tr>
 				      	<th>Cosa</th>
-				      	<th>Costo</th>
-				      	<th>Data scadenza</th>
+				      	<th class="text-right">Costo</th>
+				      	<th class="text-center">Data scadenza</th>
 				    </tr>
 				</thead>
 				<tbody>
 					{% for memo in memos %}
 				    <tr>
 				      	<td>{{ memo.title }}</td>
-				      	<td>
-				      		{% if memo.cost %}{{ memo.cost }}{% endif %}
+				      	<td class="text-right">
+				      		{% if memo.cost %}{{ memo.cost }} €{% endif %}
 				      	</td>
-				      	<td>
+				      	<td class="text-center">
 				      		{% if memo.expiry_date %}{{ memo.expiry_date }}{% endif %}
 				      	</td>
 				    </tr>
@@ -46,7 +46,7 @@
 				<thead class="thead-inverse">
 				    <tr>
 				      	<th>Nome</th>
-				      	<th>Costo</th>
+				      	<th class="text-right">Costo</th>
 				      	<th>Data scadenza</th>
 				      	<th class="text-center">Pagata</th>
 				      	<th class="text-center">Data pagamento</th>
@@ -56,7 +56,7 @@
 					{% for bill in bills %}
 				    <tr>
 				      	<td>{{ bill.title }}</td>
-				      	<td>{{ bill.cost }}</td>
+				      	<td class="text-right">{{ bill.cost }} €</td>
 				      	<td>{{ bill.expiry_date }}</td>
 				      	<td class="text-center">
 				      		{% if bill.payed %}
@@ -82,8 +82,8 @@
 				<thead class="thead-inverse">
 				    <tr>
 				      	<th>Nome</th>
-				      	<th>Costo</th>
-				      	<th>Data spesa</th>
+				      	<th class="text-right">Costo</th>
+				      	<th class="text-center">Data spesa</th>
 				      	<th class="text-center">Chi ha speso</th>
 				    </tr>
 				</thead>
@@ -91,8 +91,8 @@
 					{% for expense in expenses %}
 				    <tr>
 				      	<td>{{ expense.title }}</td>
-				      	<td>{{ expense.cost }}</td>
-				      	<td>{{ expense.payed_date }}</td>
+				      	<td class="text-right">{{ expense.cost }} €</td>
+				      	<td class="text-center">{{ expense.payed_date }}</td>
 				      	<td class="text-center">
 				      		{{ expense.person.0 }}
 						</td>

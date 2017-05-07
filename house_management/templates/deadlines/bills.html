@@ -19,8 +19,8 @@
 			<thead class="thead-inverse">
 			    <tr>
 			      	<th>Nome</th>
-			      	<th>Costo</th>
-			      	<th>Data scadenza</th>
+			      	<th class="text-right">Costo</th>
+			      	<th class="text-center">Data scadenza</th>
 			      	<th class="text-center">Pagata</th>
 			      	<th class="text-center">Da chi</th>
 			      	<th class="text-center">Data pagamento</th>
@@ -30,8 +30,8 @@
 				{% for bill in bills %}
 				<tr class="clickable-row" data-url="{% url 'bill-detail' pk=bill.pk %}">
 			      	<td>{{ bill.title }}</td>
-			      	<td>{{ bill.cost }}</td>
-			      	<td>{{ bill.expiry_date }}</td>
+			      	<td class="text-right">{{ bill.cost }} €</td>
+			      	<td class="text-center">{{ bill.expiry_date }}</td>
 			      	<td class="text-center">
 			      		{% if bill.payed %}
 			      			<i class="fa fa-thumbs-up" aria-hidden="true"></i>

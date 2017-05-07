@@ -15,7 +15,7 @@ class ExpenseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Expense
-        fields = ('pk', 'title', 'cost', 'payed_date', 'person')
+        fields = ('pk', 'title', 'cost', 'payed_date', 'person', 'get_person')
 
 
 class MemoSerializer(serializers.ModelSerializer):
