@@ -5,10 +5,10 @@ from .models import Bill, Expense, Memo
 
 class BillSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Bill
-        fields = ('pk', 'title', 'cost', 'expiry_date', 'payed', 'person', 'get_person', 
-        		  'payed_date', 'payed_image')
+	class Meta:
+		model = Bill
+		fields = ('pk', 'title', 'cost', 'expiry_date', 'payed', 'person', 'get_person', 
+				  'payed_date', 'payed_image')
 
 
 class ExpenseSerializer(serializers.ModelSerializer):

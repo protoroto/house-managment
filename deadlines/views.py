@@ -149,7 +149,7 @@ class BillDetail(APIView):
     renderer_classes = (TemplateHTMLRenderer,)
     template_name = 'deadlines/bill_detail.html'
 
-    def get(self, request, pk):
+    def get(self, request, pk, format=None):
         bill = get_object_or_404(Bill, pk=pk)
         serializer = BillSerializer(bill)
         return Response({'serializer': serializer, 'bill': bill})

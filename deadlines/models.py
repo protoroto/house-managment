@@ -40,7 +40,8 @@ class Bill(models.Model):
     )
     payed_image = models.ImageField(
         verbose_name=_(u'Immagine bolletta pagata'),
-        blank=True, null=True
+        blank=True, null=True,
+        upload_to='bill-images/%Y/%m/%d/'
     )
 
     class Meta:
