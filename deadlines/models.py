@@ -85,7 +85,7 @@ class Expense(models.Model):
     class Meta:
         verbose_name = _('Spesa')
         verbose_name_plural = _('Spese')
-        ordering = ('payed_date',)
+        ordering = ('-payed_date',)
 
     def __str__(self):
         return '{} - {} - {} - {}'.format(self.payed_date, self.title, self.cost, self.person)

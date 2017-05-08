@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.db.models import Sum
 from django_filters import rest_framework as filters
 from django.http import Http404
@@ -45,9 +46,9 @@ class HouseManagementList(APIView):
     template_name='deadlines/general_list.html'
 
     def get(self, request, format=None):
-        bills = Bill.objects.filter(payed=False)
-        expenses = Expense.objects.all()
-        memo = Memo.objects.all()
+        bills = Bill.objects.all()[:settings.ENTRY_NUMBER_IN_HOME]
+        expenses = Expense.objects.all()[:settings.ENTRY_NUMBER_IN_HOME]
+        memo = Memo.objects.all()[:settings.ENTRY_NUMBER_IN_HOME]
         bills_serializer = BillSerializer(bills, many=True)
         expenses_serializer = ExpenseSerializer(expenses, many=True)
         memo_serializer = MemoSerializer(memo, many=True)

@@ -1,11 +1,16 @@
 $blue-light: #d9eef2;
 $blue: #8da4cc;
+$blue-button-bs: #0275d8;
 $blue-dark: #464a56;
 $white: #ffffff;
 $red: #c55151;
 $yellow: #d6c944;
 
 $gutter: 20px;
+$gutter-half: $gutter / 2;
+$gutter-quarter: $gutter / 4;
+$gutter-double: $gutter * 2;
+$gutter-quadruple: $gutter * 4;
 
 
 body {
@@ -27,17 +32,18 @@ h2 {
 
 h2 {
     text-align: center;
+    font-size: 46px;
 }
 
 header {
     padding: $gutter;
-    margin-bottom: $gutter * 2;
+    margin-bottom: $gutter-double;
     background: $blue-dark;
 }
 
 footer {
-    padding: $gutter * 2;
-    margin-top: $gutter * 2;
+    padding: $gutter-double;
+    margin-top: $gutter-double;
     background: $blue-dark;
 }
 
@@ -49,7 +55,7 @@ footer {
 
 .main-menu--item {
     display: inline-block;
-    margin-right: $gutter / 2;
+    margin-right: $gutter-half;
     text-transform: uppercase;
 
     a {
@@ -57,7 +63,7 @@ footer {
         border-color: $blue-dark;
         text-decoration: none;
         background: $blue-light;
-        padding: $gutter / 2 $gutter;
+        padding: $gutter-half $gutter;
     }
 
     &:hover {
@@ -87,16 +93,20 @@ footer {
     padding: $gutter;
     background: $blue-dark;
     color: $white;
-    border-radius: $gutter / 4;
+    border-radius: $gutter-quarter;
     border: 2px solid $blue;
     text-transform: uppercase;
+
+    @media(max-width:991px){
+        margin-bottom: $gutter-double;
+    }
 }
 
 .help-block {
     background: $red;
     display: block;
-    border-radius: 0 0 $gutter / 4 $gutter / 4;
-    padding: $gutter / 4 15px $gutter / 4;
+    border-radius: 0 0 $gutter-quarter $gutter-quarter;
+    padding: $gutter-quarter 15px $gutter-quarter;
     color: $white;
     margin-top: -2px;
     border: 1px solid rgba(0,0,0,.15)
@@ -105,11 +115,26 @@ footer {
 .expense {
     padding: $gutter;
     text-align: center;
-    border-radius: $gutter / 4;
+    border-radius: $gutter-quarter;
 
     span {
         font-size: 20px;
         font-weight: bold;
+    }
+}
+
+.person-name {
+    padding: $gutter-quarter $gutter-half;
+    border-radius: $gutter-quarter;
+
+    &.person-isa {
+        background: $red;
+        color: $white;
+    }
+
+    &.person-leo {
+        background: $blue-button-bs;
+        color: $white;
     }
 }
 
@@ -120,3 +145,4 @@ footer {
 .expense-isa {
     background: $yellow;
 }
+

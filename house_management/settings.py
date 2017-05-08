@@ -148,3 +148,5 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FileUploadParser',
     ),
 }
+
+ENTRY_NUMBER_IN_HOME = 10
