@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from rest_framework import generics, mixins, status
 from rest_framework.filters import OrderingFilter
 
-from .models import Bill, Expense, Memo
+from .models import Bill, Expense, Memo, MONTHS
 from .serializers import BillSerializer, ExpenseSerializer, MemoSerializer
 
 
@@ -125,6 +125,7 @@ class ExpenseList(APIView):
             'serializer': form_serializer,
             'total_leo': expenses_leo['total_leo'],
             'total_isa': expenses_isa['total_isa'],
+            'months': MONTHS,
         })
 
     def post(self, request, format=None):

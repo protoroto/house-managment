@@ -11,6 +11,20 @@ PERSON = (
     ('I', _("Isa")),
 )
 
+MONTHS = (
+    ('1', _("Gennaio")),
+    ('2', _("Febbraio")),
+    ('3', _("Marzo")),
+    ('4', _("Aprile")),
+    ('5', _("Maggio")),
+    ('6', _("Giugno")),
+    ('7', _("Luglio")),
+    ('8', _("Agosto")),
+    ('9', _("Settembre")),
+    ('10', _("Ottobre")),
+    ('11', _("Novembre")),
+    ('12', _("Dicembre")),
+)
 
 class Bill(models.Model):
     title = models.CharField(

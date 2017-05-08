@@ -7,6 +7,13 @@
 	<div class="col-sm-12">
 		<h2>Spese</h2>
 	</div>
+	<div class="col-sm-12">
+		<ul class="month-selector">
+			{% for month in months %}
+				<li class="month-selector--item"><a class="btn btn-primary" href="{% url 'expenses' %}?payed_date__month={{ month.0 }}">{{ month.1 }}</a></li>
+			{% endfor %}
+        </ul>
+	</div>
 	<div class="col-sm-12 col-md-12 col-lg-3">
 		<form class="add-form" action="" method="post">
 		    {% csrf_token %}
@@ -39,8 +46,10 @@
 		</table>
 	</div>
 	<div class="col-sm-12 col-md-12 col-lg-2">
-		<p class="expense expense-leo">Leo: <span>{{ total_leo }} €</span></p>
-		<p class="expense expense-isa">Isa: <span>{{ total_isa }} €</span></p>
+		<p class="expense expense-leo">Leo: 
+			<span>{% if total_leo %}{{ total_leo }} €{% else %}0 €{% endif %}</span></p>
+		<p class="expense expense-isa">Isa: 
+			<span>{% if total_isa %}{{ total_isa }} €{% else %}0 €{% endif %}</span></p>
 	</div>
 </div>
 

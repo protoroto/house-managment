@@ -48,15 +48,21 @@ footer {
     background: $blue-dark;
 }
 
-.main-menu {
+.main-menu,
+.month-selector {
     text-align: center;
     list-style: none;
     margin-bottom: 0;
+    padding-left: 0;
+}
+
+.month-selector {
+    margin-bottom: $gutter;
 }
 
 .main-menu--item {
     display: inline-block;
-    margin-right: $gutter-half;
+    margin: 0  $gutter-half $gutter-half 0;
     text-transform: uppercase;
 
     a {
@@ -73,6 +79,35 @@ footer {
             background: $blue-button-bs-dark;
             color: $white;
         }
+    }
+}
+
+.month-selector--item {
+    display: inline-block;
+    margin: 0  $gutter-quarter $gutter-quarter 0;
+    text-transform: uppercase;
+
+    a {
+        color: $white;
+        border-color: $blue-dark;
+        text-decoration: none;
+        background: $blue-button-bs;
+        padding: $gutter-quarter $gutter-half;
+        font-size: 15px;
+    }
+
+    &:hover {
+
+        a {
+            background: $blue-button-bs-dark;
+            color: $white;
+        }
+    }
+}
+
+.table {
+    @media(max-width:400px){
+        font-size: 12px;
     }
 }
 
