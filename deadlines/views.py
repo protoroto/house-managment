@@ -17,6 +17,12 @@ from .models import Bill, Expense, Memo
 from .serializers import BillSerializer, ExpenseSerializer, MemoSerializer
 
 
+class ExpenseFilter(filters.FilterSet):
+    class Meta:
+        model = Expense
+        fields = {'payed_date': ['gt', 'lt']}
+
+
 class BillViewSet(viewsets.ModelViewSet):
     queryset = Bill.objects.all()
     serializer_class = BillSerializer
@@ -29,7 +35,8 @@ class ExpenseViewSet(viewsets.ModelViewSet):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
     filter_backends = (filters.DjangoFilterBackend, OrderingFilter,)
-    filter_fields = ('cost', 'person',)
+    filter_fields = ('cost', 'person', 'payed_date',)
+    filter_class = ExpenseFilter
     ordering_fields = ('cost', 'payed_date')
 
 
@@ -65,8 +72,6 @@ class BillList(APIView):
     serializer_class = BillSerializer
     renderer_classes = (TemplateHTMLRenderer,)
     template_name = 'deadlines/bills.html'
-    filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('payed',)
 
     def get(self, request, format=None):
         bills = Bill.objects.all()
@@ -94,17 +99,25 @@ class BillList(APIView):
 
 
 class ExpenseList(APIView):
+    '''
+    List all expenses from current month: if payed_date__month query parameter is present
+    list all expenses from that month (and the two sum accordingly)
+    '''
 
     renderer_classes = (TemplateHTMLRenderer,)
     template_name = 'deadlines/expenses.html'
 
     def get(self, request, format=None):
         this_month = now().month
-        expenses = Expense.objects.all()
-        expenses_leo = Expense.objects.filter(
-            person='L').filter(payed_date__month=this_month).aggregate(total_leo=Sum('cost'))
-        expenses_isa = Expense.objects.filter(
-            person='I').filter(payed_date__month=this_month).aggregate(total_isa=Sum('cost'))
+        payed_date_month = self.request.query_params.get('payed_date__month')
+        if payed_date_month:
+            expenses = Expense.objects.filter(payed_date__month=payed_date_month)
+        else:
+            expenses = Expense.objects.filter(payed_date__month=this_month)
+        expenses_leo = expenses.filter(person='L').filter(
+            payed_date__month=payed_date_month if payed_date_month else this_month).aggregate(total_leo=Sum('cost'))
+        expenses_isa = expenses.filter(person='I').filter(
+            payed_date__month=payed_date_month if payed_date_month else this_month).aggregate(total_isa=Sum('cost'))
         expense_serializer = ExpenseSerializer(expenses, many=True)
         form_serializer = ExpenseSerializer
         return Response({
