@@ -174,11 +174,11 @@ footer {
     }
 }
 
-.expense-leo {
-    background: $yellow;
-}
-
+.expense-leo,
 .expense-isa {
     background: $yellow;
 }
 
+.expense-difference {
+    background: $red;
+}

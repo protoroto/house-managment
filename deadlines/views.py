@@ -118,6 +118,15 @@ class ExpenseList(APIView):
             payed_date__month=payed_date_month if payed_date_month else this_month).aggregate(total_leo=Sum('cost'))
         expenses_isa = expenses.filter(person='I').filter(
             payed_date__month=payed_date_month if payed_date_month else this_month).aggregate(total_isa=Sum('cost'))
+        
+        if expenses_leo['total_leo'] and expenses_isa['total_isa']:
+            if expenses_leo['total_leo'] > expenses_isa['total_isa']:
+                difference = (expenses_leo['total_leo'] - expenses_isa['total_isa']) / 2
+            else:
+                difference = (expenses_isa['total_isa'] - expenses_leo['total_leo']) / 2
+        else:
+            difference = 0
+
         expense_serializer = ExpenseSerializer(expenses, many=True)
         form_serializer = ExpenseSerializer
         return Response({
@@ -125,6 +134,7 @@ class ExpenseList(APIView):
             'serializer': form_serializer,
             'total_leo': expenses_leo['total_leo'],
             'total_isa': expenses_isa['total_isa'],
+            'difference': difference,
             'months': MONTHS,
         })
 
