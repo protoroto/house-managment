@@ -1,6 +1,7 @@
 $blue-light: #d9eef2;
 $blue: #8da4cc;
 $blue-button-bs: #0275d8;
+$blue-button-bs-dark: #025aa5;
 $blue-dark: #464a56;
 $white: #ffffff;
 $red: #c55151;
@@ -59,17 +60,17 @@ footer {
     text-transform: uppercase;
 
     a {
-        color: $blue-dark;
+        color: $white;
         border-color: $blue-dark;
         text-decoration: none;
-        background: $blue-light;
+        background: $blue-button-bs;
         padding: $gutter-half $gutter;
     }
 
     &:hover {
 
         a {
-            background: $blue;
+            background: $blue-button-bs-dark;
             color: $white;
         }
     }
