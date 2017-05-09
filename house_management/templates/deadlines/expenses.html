@@ -10,7 +10,9 @@
 	<div class="col-sm-12">
 		<ul class="month-selector">
 			{% for month in months %}
-				<li class="month-selector--item"><a class="btn btn-primary" href="{% url 'expenses' %}?payed_date__month={{ month.0 }}">{{ month.1 }}</a></li>
+				<li class="month-selector--item{% if month.0 == month_selected %} selected{% endif %}">
+					<a class="btn btn-primary" href="{% url 'expenses' %}?payed_date__month={{ month.0 }}">{{ month.1 }}</a>
+				</li>
 			{% endfor %}
         </ul>
 	</div>
@@ -46,11 +48,11 @@
 		</table>
 	</div>
 	<div class="col-sm-12 col-md-12 col-lg-2">
-		<p class="expense expense-leo">Leo 
+		<p class="expense expense-leo">Leo
 			<span>{% if total_leo %}{{ total_leo }} €{% else %}0 €{% endif %}</span></p>
-		<p class="expense expense-isa">Isa 
+		<p class="expense expense-isa">Isa
 			<span>{% if total_isa %}{{ total_isa }} €{% else %}0 €{% endif %}</span></p>
-		<p class="expense expense-difference">Diff: 
+		<p class="expense expense-difference">Diff:
 			<span>{{ difference }} €</span></p>
 	</div>
 </div>

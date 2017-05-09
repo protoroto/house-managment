@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from decimal import Decimal
+
 from django.conf import settings
 from django.db.models import Sum
 from django_filters import rest_framework as filters
@@ -108,34 +110,42 @@ class ExpenseList(APIView):
     template_name = 'deadlines/expenses.html'
 
     def get(self, request, format=None):
+        '''
+        If query_params has payed_date__month return the expenses and the total expenses per person
+        of that month, otherwise return current month expenses and totals.
+        '''
         this_month = now().month
         payed_date_month = self.request.query_params.get('payed_date__month')
         if payed_date_month:
             expenses = Expense.objects.filter(payed_date__month=payed_date_month)
         else:
             expenses = Expense.objects.filter(payed_date__month=this_month)
-        expenses_leo = expenses.filter(person='L').filter(
-            payed_date__month=payed_date_month if payed_date_month else this_month).aggregate(total_leo=Sum('cost'))
-        expenses_isa = expenses.filter(person='I').filter(
-            payed_date__month=payed_date_month if payed_date_month else this_month).aggregate(total_isa=Sum('cost'))
-        
-        if expenses_leo['total_leo'] and expenses_isa['total_isa']:
-            if expenses_leo['total_leo'] > expenses_isa['total_isa']:
-                difference = (expenses_leo['total_leo'] - expenses_isa['total_isa']) / 2
-            else:
-                difference = (expenses_isa['total_isa'] - expenses_leo['total_leo']) / 2
-        else:
-            difference = 0
+        total_expenses_leo = expenses.filter(
+            person='L').filter(
+            payed_date__month=payed_date_month if payed_date_month else this_month).aggregate(
+            total_leo=Sum('cost'))
+        total_expenses_isa = expenses.filter(
+            person='I').filter(
+            payed_date__month=payed_date_month if payed_date_month else this_month).aggregate(
+            total_isa=Sum('cost'))
+        expenses_leo = total_expenses_leo['total_leo'] or Decimal(0)
+        expenses_isa = total_expenses_isa['total_isa'] or Decimal(0)
+
+        month_selected = this_month if not payed_date_month else payed_date_month
+
+        difference = abs((expenses_leo - expenses_isa) / 2) if expenses_leo or expenses_isa else 0
 
         expense_serializer = ExpenseSerializer(expenses, many=True)
         form_serializer = ExpenseSerializer
+
         return Response({
             'expenses': expense_serializer.data,
             'serializer': form_serializer,
-            'total_leo': expenses_leo['total_leo'],
-            'total_isa': expenses_isa['total_isa'],
+            'total_leo': expenses_leo,
+            'total_isa': expenses_isa,
             'difference': difference,
             'months': MONTHS,
+            'month_selected': month_selected,
         })
 
     def post(self, request, format=None):

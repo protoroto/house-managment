@@ -91,9 +91,14 @@ footer {
         color: $white;
         border-color: $blue-dark;
         text-decoration: none;
-        background: $blue-button-bs;
+        background: $blue;
         padding: $gutter-quarter $gutter-half;
         font-size: 15px;
+    }
+
+    &.selected a {
+        background: $blue-button-bs-dark;
+        color: $white;
     }
 
     &:hover {
