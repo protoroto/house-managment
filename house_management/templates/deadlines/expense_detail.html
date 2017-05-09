@@ -5,9 +5,9 @@
 {% block content %}
 <div class="row">
 	<div class="col-sm-12">
-		<h2>Spese {{ expense.title }}</h2>
+		<h2>{{ expense.title }} {{ expense.payed_date|date:'d/m/Y' }}</h2>
 	</div>
-	<div class="col-sm-12">
+	<div class="col-sm-12 col-md-12 col-lg-8 mx-auto">
 		<form class="add-form" action="" method="post">
 		    {% csrf_token %}
 		    {% render_form serializer template_pack='rest_framework/vertical' %}
