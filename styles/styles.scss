@@ -5,6 +5,11 @@ body {
     background: $blue-light;
 }
 
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Crimson Text', serif;
     font-weight: bold;
@@ -101,9 +106,9 @@ footer {
 
     a {
         color: $white;
-        border-color: $blue-dark;
         text-decoration: none;
         background: $blue;
+        border: none;
         padding: $gutter-quarter $gutter-half;
         font-size: 15px;
 
@@ -159,6 +164,14 @@ footer {
 
 .thead-inverse th {
     background-color: $blue-dark;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: $white;
 }
 
 .table-hover tbody tr {
