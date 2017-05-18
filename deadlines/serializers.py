@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 from rest_framework import serializers
+
 from .models import Bill, Expense, Memo
 
 
 class BillSerializer(serializers.ModelSerializer):
-    expiry_date = serializers.DateField(format='%d/%m/%Y')
+    expiry_date = serializers.DateField(
+        format='%d/%m/%Y',
+        label='Data di scadenza',
+    )
     payed_date = serializers.DateField(format='%d/%m/%Y')
 
     class Meta:
@@ -14,7 +18,10 @@ class BillSerializer(serializers.ModelSerializer):
 
 
 class ExpenseSerializer(serializers.ModelSerializer):
-    payed_date = serializers.DateField(format='%d/%m/%Y')
+    payed_date = serializers.DateField(
+        format='%d/%m/%Y', 
+        label='Data pagamento'
+    )
 
     class Meta:
         model = Expense
@@ -22,7 +29,10 @@ class ExpenseSerializer(serializers.ModelSerializer):
 
 
 class MemoSerializer(serializers.ModelSerializer):
-    expiry_date = serializers.DateField(format='%d/%m/%Y')
+    expiry_date = serializers.DateField(
+        format='%d/%m/%Y',
+        label='Data di scadenza',
+    )
 
     class Meta:
         model = Memo

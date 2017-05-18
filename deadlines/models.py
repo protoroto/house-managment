@@ -51,6 +51,7 @@ class Bill(models.Model):
     payed_date = models.DateField(
         verbose_name=_(u'Data di pagamento'),
         blank=True, null=True,
+        default=timezone.now
     )
     payed_image = models.ImageField(
         verbose_name=_(u'Immagine bolletta pagata'),
@@ -89,7 +90,7 @@ class Expense(models.Model):
     payed_date = models.DateField(
         verbose_name=_(u'Data della spesa'),
         blank=False, null=False,
-        default=date.today
+        default=timezone.now
     )
     person = models.CharField(
         verbose_name=_(u"Chi ha speso"),
