@@ -12,7 +12,8 @@ class BillSerializer(serializers.ModelSerializer):
     )
     payed_date = serializers.DateField(
         label=_(u"Data pagamento"), 
-        format='%d/%m/%Y'
+        format='%d/%m/%Y',
+        required=False
     )
 
     class Meta:
@@ -35,7 +36,8 @@ class ExpenseSerializer(serializers.ModelSerializer):
 class MemoSerializer(serializers.ModelSerializer):
     expiry_date = serializers.DateField(
         label=_(u"Data scadenza"), 
-        format='%d/%m/%Y'
+        format='%d/%m/%Y',
+        required=False
     )
 
     class Meta:

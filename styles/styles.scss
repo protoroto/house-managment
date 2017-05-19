@@ -214,6 +214,23 @@ footer {
     width: 100%;
 }
 
+.btn.btn-primary.btn-delete {
+    background-color: $red;
+    margin-left: $gutter;
+    border-color: $red;
+    text-transform: none;
+
+    &:hover {
+        background-color: $white;
+        border-color: $white;
+        color: $red;
+    }
+}
+
+.add-form-button-container {
+    text-align: center;
+}
+
 .help-block {
     background: $red;
     display: block;

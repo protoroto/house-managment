@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load rest_framework %}
+{% load rest_framework sekizai_tags %}
 
 
 {% block content %}
@@ -8,11 +8,29 @@
 		<h2>{{ memo.title }}</h2>
 	</div>
 	<div class="col-sm-12 col-md-12 col-lg-8 mx-auto">
-		<form class="add-form" action="" method="post">
+		<form class="add-form" action="" method="POST">
 		    {% csrf_token %}
 		    {% render_form serializer template_pack='rest_framework/vertical' %}
-		    <button type="submit" class="btn btn-primary">Save</button>
+		    <div class="add-form-button-container">
+		    	<button type="submit" class="btn btn-primary">Save</button>
+		    	<a class="btn btn-primary btn-delete">Delete</a>
+			</div>
 		</form>
 	</div>
 </div>
+
+{% addtoblock "bottom_js" %}
+<script type="text/javascript">
+	$(".btn-delete").click(function(e) {
+	    $.ajax({
+		    type: 'DELETE',
+		    url: '/api/memo/' + {{ memo.pk }},
+		    success: function(data) {
+		    	window.location.replace('/memo');
+		    }
+		});
+	});
+</script>
+{% endaddtoblock %}
+
 {% endblock %}
