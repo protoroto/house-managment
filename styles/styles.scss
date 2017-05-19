@@ -246,6 +246,7 @@ footer {
     border-radius: $gutter-quarter;
 
     span {
+        display: block;
         font-size: 20px;
         font-weight: bold;
     }
