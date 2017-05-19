@@ -72,7 +72,6 @@ footer {
         color: $white;
         text-decoration: none;
         background: $blue-button-bs;
-        border-radius: 0;
         padding: $gutter-half $gutter;
         font-size: 20px;
 
@@ -93,7 +92,7 @@ footer {
         a {
             background: $white;
             color: $blue-button-bs;
-            box-shadow: inset 0 0 0 3px $blue-button-bs;
+            border-color: $white;
         }
     }
 }

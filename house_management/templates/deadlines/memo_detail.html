@@ -22,13 +22,16 @@
 {% addtoblock "bottom_js" %}
 <script type="text/javascript">
 	$(".btn-delete").click(function(e) {
-	    $.ajax({
-		    type: 'DELETE',
-		    url: '/api/memo/' + {{ memo.pk }},
-		    success: function(data) {
-		    	window.location.replace('/memo');
-		    }
-		});
+		var answer = confirm ("Are you sure?");
+		if (answer) {
+		    $.ajax({
+			    type: 'DELETE',
+			    url: '/api/memo/' + {{ memo.pk }},
+			    success: function(data) {
+			    	window.location.replace('/memo');
+			    }
+			});
+		}
 	});
 </script>
 {% endaddtoblock %}
