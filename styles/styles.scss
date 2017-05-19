@@ -220,9 +220,8 @@ footer {
     text-transform: none;
 
     &:hover {
-        background-color: $white;
-        border-color: $white;
-        color: $red;
+        background-color: $red-dark;
+        border-color: $red-dark;
         cursor: default;
     }
 }
