@@ -108,31 +108,32 @@ class ExpenseList(APIView):
 
     renderer_classes = (TemplateHTMLRenderer,)
     template_name = 'deadlines/expenses.html'
+    this_month = now().month
 
     def get(self, request, format=None):
         '''
         If query_params has payed_date__month return the expenses and the total expenses per person
         of that month, otherwise return current month expenses and totals.
         '''
-        this_month = now().month
+        
         payed_date_month = self.request.query_params.get('payed_date__month')
         if payed_date_month:
             expenses = Expense.objects.filter(payed_date__month=payed_date_month)
         else:
-            expenses = Expense.objects.filter(payed_date__month=this_month)
+            expenses = Expense.objects.filter(payed_date__month=self.this_month)
         total_expenses_leo = expenses.filter(
             person='L').filter(
-            payed_date__month=payed_date_month if payed_date_month else this_month).aggregate(
+            payed_date__month=payed_date_month if payed_date_month else self.this_month).aggregate(
             total_leo=Sum('cost'))
         total_expenses_isa = expenses.filter(
             person='I').filter(
-            payed_date__month=payed_date_month if payed_date_month else this_month).aggregate(
+            payed_date__month=payed_date_month if payed_date_month else self.this_month).aggregate(
             total_isa=Sum('cost'))
 
         expenses_leo = total_expenses_leo['total_leo'] or Decimal(0)
         expenses_isa = total_expenses_isa['total_isa'] or Decimal(0)
 
-        month_selected = str(this_month) if not payed_date_month else payed_date_month
+        month_selected = str(self.this_month) if not payed_date_month else payed_date_month
 
         difference = abs((expenses_leo - expenses_isa) / 2) if expenses_leo or expenses_isa else 0
 
@@ -158,7 +159,9 @@ class ExpenseList(APIView):
             return redirect('expenses')
         return Response({
             'expenses': expense_serializer.data,
-            'serializer': form_serializer
+            'serializer': form_serializer,
+            'months': MONTHS,
+            'month_selected': str(self.this_month)
         }, status=status.HTTP_400_BAD_REQUEST)
 
 
