@@ -7,7 +7,7 @@
 	<div class="col-sm-12">
 		<h2>Spese {{ months|get_item:month_selected }}</h2>
 	</div>
-	<div class="col-sm-12">
+	<div class="col-sm-12 month-selector-container">
 		<ul class="month-selector">
 			{% for month in months %}
 				<li class="month-selector--item{% if month.0 == month_selected %} selected{% endif %}">

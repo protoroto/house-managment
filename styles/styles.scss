@@ -1,7 +1,7 @@
 @import "settings";
 
 body {
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Droid Serif', sans-serif;
     background: $blue-light;
 }
 
@@ -11,15 +11,13 @@ table {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Crimson Text', serif;
+    font-family: 'Ubuntu', serif;
     font-weight: bold;
 }
 
 h1,
 h2 {
     margin-bottom: $gutter;
-    letter-spacing: 2px;
-    text-transform: uppercase;
 }
 
 h2 {
@@ -59,8 +57,26 @@ footer {
     padding-left: 0;
 }
 
+.month-selector-container {
+    margin-bottom: $gutter;
+}
+
 .month-selector {
     margin-bottom: $gutter;
+    width: 55%;
+    margin: 0 auto;
+
+    @media(max-width: 991px){
+        width: 85%;
+    }
+
+    @media(max-width: 767px){
+        width: 90%;
+    }
+
+    @media(max-width: 575px){
+        width: 100%;
+    }
 }
 
 .main-menu--item {
@@ -106,7 +122,7 @@ footer {
     a {
         color: $white;
         text-decoration: none;
-        background: $blue;
+        background: darken($blue, 10%);
         border: none;
         padding: $gutter-quarter $gutter-half;
         font-size: 15px;
