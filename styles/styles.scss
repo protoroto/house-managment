@@ -213,6 +213,10 @@ footer {
     width: 100%;
 }
 
+.btn-primary {
+    border-color: $blue-light;
+}
+
 .btn.btn-primary.btn-delete {
     background-color: $red;
     margin-left: $gutter;
